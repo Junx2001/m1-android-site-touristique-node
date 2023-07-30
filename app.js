@@ -8,6 +8,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 var usersRouter = require('./src/routes/users/user.routes');
+var serverRouter = require('./src/routes/server/server.routes');
 
 var app = express();
 
@@ -21,7 +22,9 @@ app.use(bodyParser.json());
 
 
 // Routes list
+app.use('/', serverRouter);
 app.use('/users', usersRouter);
+
 
 
 
