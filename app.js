@@ -7,8 +7,12 @@ const cors = require('cors');
 //const mongoose = require('./src/database/DatabaseManager').mongo;
 const bodyParser = require('body-parser');
 
-var usersRouter = require('./src/routes/users/user.routes');
 var serverRouter = require('./src/routes/server/server.routes');
+var usersRouter = require('./src/routes/users/user.routes');
+var sitesRouter = require('./src/routes/sites/site.routes');
+var regionsRouter = require('./src/routes/regions/region.routes');
+
+
 
 var app = express();
 
@@ -24,7 +28,8 @@ app.use(bodyParser.json());
 // Routes list
 app.use('/', serverRouter);
 app.use('/users', usersRouter);
-
+app.use('/sites', sitesRouter);
+app.use('/regions', regionsRouter);
 
 
 
