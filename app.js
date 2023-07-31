@@ -11,6 +11,7 @@ var serverRouter = require('./src/routes/server/server.routes');
 var usersRouter = require('./src/routes/users/user.routes');
 var sitesRouter = require('./src/routes/sites/site.routes');
 var regionsRouter = require('./src/routes/regions/region.routes');
+var notifsRouter = require('./src/routes/notifications/notification.routes');
 
 
 
@@ -30,6 +31,7 @@ app.use('/', serverRouter);
 app.use('/users', usersRouter);
 app.use('/sites', sitesRouter);
 app.use('/regions', regionsRouter);
+app.use('/notifications', notifsRouter);
 
 
 
