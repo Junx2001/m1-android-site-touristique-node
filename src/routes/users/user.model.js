@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Number,
     default: 1
+  },
+  registration_token: {
+    type: String
   }
 });
 
