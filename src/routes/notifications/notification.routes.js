@@ -6,6 +6,7 @@ const Url = require('../../constants/Url');
 
 router.get('/', checkAuth, notifControllers.getAllMyNotifs);
 router.get('/:notificationId', checkAuth, notifControllers.getNotifDetail);
+router.post('/read/:notificationId', checkAuth, notifControllers.readNotif);
 
 
 module.exports = router;
