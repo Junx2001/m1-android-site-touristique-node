@@ -105,6 +105,20 @@ const userLogin = (req, res, next) => {
             {}
           );
           console.log(user[0]);
+
+          // Registration Token Used to Notify User using Firebase Custom Notification
+          const registrationToken = req.headers['registration-token'];
+          if(registrationToken){
+            User.findByIdAndUpdate(user[0]._id, { registration_token: registrationToken }, { new: true })
+            .then(updatedUser => {
+                console.log('User\'s registration token updated:', updatedUser);
+            })
+            .catch(error => {
+              console.error('Error updating user registration token:', error);
+            });
+          }
+          // Registration Token Used to Notify User using Firebase Custom Notification
+
           return res.status(200).json({
             message: "Auth successful",
             userDetails: {

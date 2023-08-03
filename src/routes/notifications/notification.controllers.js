@@ -44,7 +44,46 @@ const getNotifDetail = async (req, res) => {
 };
 
 
+const readNotif = async (req, res) => {
+  try {
+    // Fetch the notification from the database to verify the conditions
+    const notification = await Notification.findById(req.params.notificationId);
+
+    // Check if the notification exists
+    if (!notification) {
+      return res.status(404).json({
+        message: 'Notification not found'
+      });
+    }
+
+    if(req.user.userId != notification.user._id){
+      return res.status(401).json({
+        message: "You are not authorized to read that notification ressource"
+        });
+    }
+
+    // If verification passes, update the notification
+    const updatedNotif = await Notification.findByIdAndUpdate(
+      req.params.notificationId,
+      { read_at: new Date() },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: `Notification with Object Id ${req.params.notificationId} has been read by ${req.user.name}`,
+      data: updatedNotif
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: error.toString()
+    });
+  }
+};
+
+
 module.exports = {
   getAllMyNotifs,
   getNotifDetail,
+  readNotif
 };
