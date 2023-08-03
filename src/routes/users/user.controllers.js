@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const mongoo = require("mongoose");
 
 const User = require("./user.model");
+const notification_service = require('../../services/notification-service');
+
 
 const userRegister = async (req, res, next) => {
   User.find({ email: req.body.email })
@@ -118,6 +120,14 @@ const userLogin = (req, res, next) => {
             });
           }
           // Registration Token Used to Notify User using Firebase Custom Notification
+
+          //Store Notification of Login and Send Push Notification to User Logged In
+          try {
+            notification_service.storeAndSendLoginNotification(registrationToken, user[0]);
+          } catch (error) {
+            console.log("ERROR with Storing and Pushing Login Notification ",error);
+          }
+          //Store Notification of Login and Send Push Notification to User Logged In
 
           return res.status(200).json({
             message: "Auth successful",
