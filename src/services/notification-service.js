@@ -27,7 +27,8 @@ const storeAndSendLoginNotification = async (registrationToken, user) => {
           body: `Hello ${user.name}, You've logged in Successfully`,
         },
         data:{
-          created_at: String(savedNotif.created_at)
+          created_at: String(savedNotif.created_at),
+          notification_id: savedNotif._id
         },
         token: registrationToken,
         android: {
