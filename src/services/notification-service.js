@@ -28,7 +28,7 @@ const storeAndSendLoginNotification = async (registrationToken, user) => {
         },
         data:{
           created_at: String(savedNotif.created_at),
-          notification_id: savedNotif._id
+          notification_id: savedNotif._id.toString()
         },
         token: registrationToken,
         android: {
