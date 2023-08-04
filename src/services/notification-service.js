@@ -11,9 +11,9 @@ const storeAndSendLoginNotification = async (registrationToken, user) => {
         content:    `Hello ${user.name}, You've logged in Successfully`,
         user:   user._id,
       });
-    
+    var savedNotif = null;
       try {
-        const savedNotif = await newNotif.save();
+        savedNotif = await newNotif.save();
         console.log("New Notification has been saved "+savedNotif);
       } catch (err) {
         console.log("Error saving notification "+err);
@@ -25,6 +25,9 @@ const storeAndSendLoginNotification = async (registrationToken, user) => {
         notification: {
           title: "Site Touristique - Login Notification",
           body: `Hello ${user.name}, You've logged in Successfully`,
+        },
+        data:{
+          created_at: String(savedNotif.created_at)
         },
         token: registrationToken,
         android: {
