@@ -8,6 +8,8 @@ router.post(Url.USER_LOGIN_ROUTE, userControllers.userLogin);
 router.post(Url.USER_SIGNUP_ROUTE, userControllers.userRegister);
 
 router.get('/me', checkAuth, userControllers.getMe);
+router.post('/updateProfile', checkAuth, userControllers.updateUserProfile);
+
 
 
 module.exports = router;

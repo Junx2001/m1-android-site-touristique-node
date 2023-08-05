@@ -166,8 +166,30 @@ const getMe = async (req, res) => {
   }
 };
 
+const updateUserProfile = async (req, res) => {
+  const userId = req.user.userId;
+  const new_name = req.body.name;
+  User.findByIdAndUpdate(userId, { name: new_name }, { new: true })
+  .then(updatedUser => {
+      console.log('User\'s profile has been updated:', updatedUser);
+      res.status(200).json({
+        message: "User\'s profile has been updated",
+        user: updatedUser,
+      });
+  })
+  .catch(error => {
+    console.error('Error updating user profile:', error);
+    res.status(500).json({
+      message: error,
+    });
+  });
+
+};
+
+
 module.exports = {
   userLogin,
   userRegister,
   getMe,
+  updateUserProfile
 };
