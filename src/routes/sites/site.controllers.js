@@ -7,7 +7,7 @@ const getSites = async (req, res) => {
 
   const query = nameQuery ? { name: { $regex: nameQuery, $options: 'i' } } : {};
 
-  Site.paginate(query, { page, limit: perPage, populate: 'region' })
+  Site.paginate(query, { page, limit: perPage,sort: { name: 1 }, populate: 'region' })
     .then((result) => {
       res.status(200).json({
         message: "Tourist Sites Fetched Successfully",
@@ -51,6 +51,9 @@ const getSiteDetail = async (req, res) => {
 
 const getSitesGroupedByRegion = async (req, res) => {
   Site.aggregate([
+    {
+      $sort: { 'sites.name': 1 }
+    },
     {
       $group: {
         _id: '$region',

@@ -5,7 +5,7 @@ const getAllMyNotifs = async (req, res) => {
   const perPage = parseInt(req.query.perPage) || 10; // Number of documents per page (default: 10)
   const userId = req.user.userId;
 
-  Notification.paginate({ user: userId }, { page, limit: perPage, populate: 'user' })
+  Notification.paginate({ user: userId }, { page, limit: perPage, sort: { created_at: -1 }, populate: 'user' })
     .then((result) => {
       res.status(200).json({
         message: "Notification for User "+req.user.name+" Fetched Successfully",
