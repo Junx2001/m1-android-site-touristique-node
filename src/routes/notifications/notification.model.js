@@ -21,7 +21,9 @@ const notificationSchema = new mongoose.Schema({
   },
   created_at: {
     type: Date,
-    default: new Date()
+    default: function () {
+      return new Date(new Date().getTime() + (3 * 60 * 60 * 1000));
+    }
   },
 });
 // Apply the plugin to the schema

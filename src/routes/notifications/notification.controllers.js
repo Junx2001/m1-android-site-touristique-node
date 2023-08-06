@@ -70,7 +70,7 @@ const readNotif = async (req, res) => {
     // If verification passes, update the notification
     const updatedNotif = await Notification.findByIdAndUpdate(
       req.params.notificationId,
-      { read_at: new Date() },
+      { read_at: new Date(new Date().getTime() + (3 * 60 * 60 * 1000)) },
       { new: true }
     );
 
