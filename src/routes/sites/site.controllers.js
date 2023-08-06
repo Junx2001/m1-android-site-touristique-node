@@ -30,6 +30,11 @@ const getSiteDetail = async (req, res) => {
 		path: 'region',
 	  }).exec()
 		.then( async (result) => {
+      if(!result){
+        return res.status(404).json({
+          message: 'Site not found'
+        });
+      }
 
 			res.status(200).json({
         message: "Tourist Site with Object Id "+req.params.siteId+" has been found",

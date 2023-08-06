@@ -29,6 +29,11 @@ const getNotifDetail = async (req, res) => {
 		path: 'user',
 	  }).exec()
 		.then( async (result) => {
+      if(!result){
+        return res.status(404).json({
+          message: 'Notification not found'
+        });
+      }
 
 			res.status(200).json({
         message: "Notification with Object Id "+req.params.notificationId+" has been found",
